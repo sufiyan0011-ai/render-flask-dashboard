@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Inventory Item</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Add Inventory Item</h1>
+
+    <form method="POST" action="{{ url_for('add_inventory') }}">
+        <label for="item_name" class="block font-medium mb-2">Item Name</label>
+        <input type="text" name="item_name" id="item_name" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="quantity" class="block font-medium mb-2">Quantity</label>
+        <input type="number" name="quantity" id="quantity" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="price" class="block font-medium mb-2">Price</label>
+        <input type="number" name="price" id="price" class="w-full p-2 border rounded mb-4" required>
+
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Add Item</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Management Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #007bff; /* Blue navbar */
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .dashboard-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .dashboard-card:hover {
+            transform: scale(1.02);
+        }
+
+        .grid-gap {
+            display: grid;
+            gap: 1rem;
+        }
+        .chart-image {
+        width: 200%; /* Make the image responsive within its container */
+        height: 350px; /* Set a fixed height for both charts */
+        object-fit: contain; /* Ensure the image fits within the container without distortion */
+    }
+        @media (min-width: 768px) {
+            .grid-gap-md-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-gap-lg-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+        .section {
+        position: relative;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{{ url_for('static', filename='Lease site 3.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            z-index: 1;
+        }
+
+        .section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #51a0f5;
+        opacity: 0.3;
+        z-index: 1;
+        }
+        .section-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        }
+        .section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        }
+        .add-lease-button {
+        background-color: #ffffff;
+        color: #007bff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        }
+        .add-lease-button:hover {
+        background-color: #0056b3;
+        color: #ffffff;
+        }
+        @media (max-width: 768px) {
+        .section h1 {
+            font-size: 2rem;
+        }
+        .add-lease-button {
+            font-size: 0.9rem;
+            padding: 8px 16px;
+        }
+        }
+
+
+
+        .footer {
+            background-color: #007bbf;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-links a {
+            color: whitesmoke;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header with Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <h1 class="text-2xl text-white font-bold">Lease Management</h1>
+            <div>
+                <a href="{{ url_for('index') }}">Dashboard</a>
+                <a href="{{ url_for('view_leases') }}">Leases</a>
+                <a href="{{ url_for('view_tenants') }}">Tenants</a>
+                <a href="{{ url_for('view_inventory') }}">Inventory</a>
+                <a href="{{ url_for('view_employees') }}">Employees</a>
+                <a href="{{ url_for('view_transactions') }}">Transactions</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Title Below the Header -->
+    <div class="mt-8 mb-6">
+        <h2 class="text-3xl font-bold text-center">Lease Management Dashboard</h2>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="grid-gap grid-gap-lg-4 grid-gap-md-2 mb-8">
+        <a href="{{ url_for('view_properties') }}">
+            <div class="dashboard-card">
+                <div>
+                    <div class="font-bold text-lg">Total Properties</div>
+                    <p class="text-2xl">{{ active_leases }}</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('view_tenants') }}">
+            <div class="dashboard-card">
+                <div>
+                    <div class="font-bold text-lg">Total Tenants</div>
+                    <p class="text-2xl">{{ total_leases }}</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('view_leases') }}">
+            <div class="dashboard-card">
+                <div>
+                    <div class="font-bold text-lg">Active Leases</div>
+                    <p class="text-2xl">{{ total_leases }}</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('view_revenue') }}">
+            <div class="dashboard-card">
+                <div>
+                    <div class="font-bold text-lg">Monthly Revenue</div>
+                    <p class="text-2xl">Pkr{{ generate_monthly_revenue_graph }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Revenue and Lease Status Charts -->
+    <div class="grid-gap grid-gap-md-2 mb-8">
+        <div class="card" style="background-color: #65aefc;">
+            <h2 class="font-bold text-xl mb-4">Monthly Revenue</h2>
+            <img src="data:image/png;base64,{{ graph_url }}" alt="Monthly Revenue Graph" class = "chart-image">
+        </div>
+
+        <div class="card" style="background-color: #65aefc;">
+            <h2 class="font-bold text-xl mb-4">Lease Status Distribution</h2>
+            <img src="data:image/png;base64,{{ pie_chart_url }}" alt="Lease Status Distribution" class="chart-image">
+        </div>
+    </div>
+
+    <!-- Pending Leases -->
+    <div class="card">
+        <h2 class="font-bold text-xl mb-4">Pending Leases</h2>
+        <table class="min-w-full bg-white border">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">Name</th>
+                    <th class="border px-4 py-2">Phone</th>
+                    <th class="border px-4 py-2">Rent Amount</th>
+                    <th class="border px-4 py-2">Lease Date</th>
+                    <th class="border px-4 py-2">Lease Number</th>
+                    <th class="border px-4 py-2">Payment Period</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lease in pending_leases %}
+                <tr>
+                    <td class="border px-4 py-2">{{ lease.name }}</td>
+                    <td class="border px-4 py-2">{{ lease.phone }}</td>
+                    <td class="border px-4 py-2">${{ lease.rent_amount }}</td>
+                    <td class="border px-4 py-2">{{ lease.lease_date }}</td>
+                    <td class="border px-4 py-2">{{ lease.lease_number }}</td>
+                    <td class="border px-4 py-2">{{ lease.payment_period }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <body>
+        <div class="section">
+          <div class="section-content">
+            <h1 style="color: rgb(26, 25, 25);">Add a New Lease to Your Property Portfolio </h1>
+            
+            <a href="{{ url_for('add_tenant') }}">
+                <button class="add-lease-button">Add Lease</button>
+            </a>
+          </div>
+        </div>
+      </body>
+    <!-- Paid Leases -->
+    <div class="card">
+        <h1 class="font-bold text-xl mb-4"><b>Paid Leases</b></h1>
+        <table class="min-w-full bg-white border">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">Name</th>
+                    <th class="border px-4 py-2">Phone</th>
+                    <th class="border px-4 py-2">Rent Amount</th>
+                    <th class="border px-4 py-2">Lease Date</th>
+                    <th class="border px-4 py-2">Lease Number</th>
+                    <th class="border px-4 py-2">Payment Period</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lease in pending_leases %}
+                <tr>
+                    <td class="border px-4 py-2">{{ lease.name }}</td>
+                    <td class="border px-4 py-2">{{ lease.phone }}</td>
+                    <td class="border px-4 py-2">${{ lease.rent_amount }}</td>
+                    <td class="border px-4 py-2">{{ lease.lease_date }}</td>
+                    <td class="border px-4 py-2">{{ lease.lease_number }}</td>
+                    <td class="border px-4 py-2">{{ lease.payment_period }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-8 mb-6">
+        <h2 class="text-3xl font-bold text-center">Property Available</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="{{ url_for('view_properties') }}">
+        <div class="dashboard-card">
+            <img src="{{ url_for('static', filename='Lease site 2.jpeg') }}" alt="Property 1" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">Neura Properties</h3>
+                <p class="text-sm">Hyderabad</p>
+            </div>
+           
+        </div>
+        </a>
+        
+    
+        <a href="{{ url_for('view_properties') }}">
+        <div class="dashboard-card">
+            <img src="{{ url_for('static', filename='Lease site1.jpeg') }}" alt="Property 1" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">Neura Heights</h3>
+                <p class="text-sm">Karachi</p>
+            </div>
+        </div>
+        </a>
+        <a href="{{ url_for('view_properties') }}">
+        <div class="dashboard-card">
+            <img src="{{ url_for('static', filename='Lease site 3.jpeg') }}" alt="Property 1" class="h-48 w-full object-cover">
+            <div class="p-4">
+                <h3 class="font-bold text-lg">NeuraSphere</h3>
+                <p class="text-sm">Islamabad</p>
+            </div>
+         
+    </div>
+        </a>
+    
+    <!-- Monthly Revenue Card -->
+    
+  
+   
+        
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Lease Management System</h3>
+                    <p class="text-white">Streamlining property management operations</p>
+                </div>
+                <div class="footer-links">
+                    <a href="{{ url_for('view_properties') }}">Privacy Policy</a>
+                    <a>Terms of Service</a>
+                    <a>Contact Us</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-700 text-center text-white">
+                <p>&copy; {{ current_year }} Lease Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Management Dashboard</title>
+    <!-- You can include your CSS here, for example, TailwindCSS or Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Lease Management Dashboard</h1>
+    
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex items-center space-x-4">
+                <div class="h-6 w-6 text-primary">
+                    <!-- Insert icon here, like <Building2 /> from lucide-react -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zm-8-8h2v6h-2zm0 0H9V9h2z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg">Total Properties</h3>
+                    <p class="text-xl">{{ total_properties }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex items-center space-x-4">
+                <div class="h-6 w-6 text-primary">
+                    <!-- Insert icon here -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 4h8v16H8z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg">Total Tenants</h3>
+                    <p class="text-xl">{{ total_tenants }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex items-center space-x-4">
+                <div class="h-6 w-6 text-primary">
+                    <!-- Insert icon here -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 3h14v18H5V3zm2 16h10V5H7v14zm2-10h6v6H9z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg">Active Leases</h3>
+                    <p class="text-xl">{{ active_leases }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex items-center space-x-4">
+                <div class="h-6 w-6 text-primary">
+                    <!-- Insert icon here -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M7 3h14v18H7zM7 5v14h12V5H7z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg">Monthly Revenue</h3>
+                    <p class="text-xl">{{ monthly_revenue }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Example of additional sections for charts -->
+    <div class="grid gap-4 md:grid-cols-2 mb-8">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h3 class="font-semibold text-lg">Monthly Revenue</h3>
+            <!-- Include your Revenue Chart component here -->
+            <!-- Example: <RevenueChart /> -->
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h3 class="font-semibold text-lg">Lease Status Distribution</h3>
+            <!-- Include your Lease Status Chart component here -->
+            <!-- Example: <LeaseStatusChart /> -->
+        </div>
+    </div>
+
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="font-semibold text-lg">Pending Leases</h3>
+        <!-- Include your Pending Leases List component here -->
+        <!-- Example: <PendingLeasesList /> -->
+    </div>
+</body>
+</html>

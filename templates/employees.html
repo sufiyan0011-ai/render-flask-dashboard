@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Employee List</h1>
+
+    <a href="{{ url_for('add_employee') }}" class="text-blue-500 hover:underline">Add Employee</a>
+
+    <table class="min-w-full bg-white border mt-4">
+        <thead>
+            <tr>
+                <th class="border px-4 py-2">Name</th>
+                <th class="border px-4 py-2">Phone</th>
+                <th class="border px-4 py-2">Salary</th>
+                
+                <th class="border px-4 py-2">Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td class="border px-4 py-2">{{ employee.name }}</td>
+                <td class="border px-4 py-2">{{ employee.phone }}</td>
+                <td class="border px-4 py-2">${{ employee.salary }}</td>
+                
+                <td class="border px-4 py-2">{{ employee.department }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

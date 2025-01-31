@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Inventory List</h1>
+
+    <a href="{{ url_for('add_inventory') }}" class="text-blue-500 hover:underline">Add Inventory Item</a>
+
+    <table class="min-w-full bg-white border mt-4">
+        <thead>
+            <tr>
+                <th class="border px-4 py-2">Item Name</th>
+                <th class="border px-4 py-2">Quantity</th>
+                <th class="border px-4 py-2">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in inventory %}
+            <tr>
+                <td class="border px-4 py-2">{{ item.item_name }}</td>
+                <td class="border px-4 py-2">{{ item.quantity }}</td>
+                <td class="border px-4 py-2">${{ item.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

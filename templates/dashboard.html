@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Dashboard</title>
+</head>
+<body>
+    <h1>Lease Dashboard</h1>
+
+    <h2>All Leases</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Rent Amount</th>
+                <th>Lease Date</th>
+                <th>Lease Number</th>
+                <th>Payment Period</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lease in all_leases %}
+            <tr>
+                <td>{{ lease.name }}</td>
+                <td>{{ lease.phone }}</td>
+                <td>{{ lease.rent_amount }}</td>
+                <td>{{ lease.lease_date }}</td>
+                <td>{{ lease.lease_number }}</td>
+                <td>{{ lease.payment_period }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Lease Statistics</h2>
+    <div>
+        <h3>Total Rent vs. Total Leases</h3>
+        <div>{{ rent_vs_leases_chart | safe }}</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Properties</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+        }
+
+        .add-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8 text-gray-700">Total Properties</h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+            <thead>
+                <tr class="bg-blue-500 text-white">
+                    <th class="border px-6 py-3 text-left">Property Name</th>
+                    <th class="border px-6 py-3 text-left">Location</th>
+                    <th class="border px-6 py-3 text-left">Rent Amount</th>
+                    <th class="border px-6 py-3 text-left">Lease Number</th>
+                    <th class="border px-6 py-3 text-left">Tenant Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr class="hover:bg-gray-100">
+                    <td class="border px-6 py-3">{{ property.property_name }}</td>
+                    <td class="border px-6 py-3">{{ property.location }}</td>
+                    <td class="border px-6 py-3">{{ property.rent_amount }}</td>
+                    <td class="border px-6 py-3">{{ property.lease_number}}</td>
+                    <td class="border px-6 py-3">{{ property.tenant_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-6">
+        <a href="{{ url_for('add_properties') }}">
+            <button class="add-btn">Add Property</button>
+        </a>
+    </div>
+</body>
+</html>

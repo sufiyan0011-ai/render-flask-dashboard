@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Transactions</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Financial Transactions</h1>
+
+    <table class="min-w-full bg-white border mt-4">
+        <thead>
+            <tr>
+                <th class="border px-4 py-2">Tenant ID</th>
+                <th class="border px-4 py-2">Transaction Type</th>
+                <th class="border px-4 py-2">Amount</th>
+                <th class="border px-4 py-2">Transaction Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td class="border px-4 py-2">{{ transaction.tenant_id }}</td>
+                <td class="border px-4 py-2">{{ transaction.transaction_type }}</td>
+                <td class="border px-4 py-2">${{ transaction.amount }}</td>
+                <td class="border px-4 py-2">{{ transaction.transaction_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Add Employee</h1>
+
+    <form method="POST" action="{{ url_for('add_employee') }}">
+        <label for="name" class="block font-medium mb-2">Name</label>
+        <input type="text" name="name" id="name" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="phone" class="block font-medium mb-2">Phone</label>
+        <input type="text" name="phone" id="phone" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="salary" class="block font-medium mb-2">Salary</label>
+        <input type="number" name="salary" id="salary" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="housing_benefit" class="block font-medium mb-2">Housing Benefit</label>
+        <input type="number" name="housing_benefit" id="housing_benefit" class="w-full p-2 border rounded mb-4" required>
+
+        <label for="department" class="block font-medium mb-2">Department</label>
+        <input type="text" name="department" id="department" class="w-full p-2 border rounded mb-4" required>
+
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Add Employee</button>
+    </form>
+</body>
+</html>
