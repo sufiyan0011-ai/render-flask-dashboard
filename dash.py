@@ -12,10 +12,10 @@ app = Flask(__name__)
 os.makedirs('static', exist_ok=True)
 # MySQL Configuration
 db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'lionel.A.messi100',
-    'database': 'lms'
+    'host': 'sql10.freesqldatabase.com',
+    'user': 'sql10760614',
+    'password': 'cFw4S43KEe',
+    'database': 'sql10760614'
 }
 
 def get_db_connection():
@@ -248,4 +248,5 @@ if __name__ == '__main__':
     cursor.close()
     conn.close()
     
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  # Render provides a dynamic port
+    app.run(host="0.0.0.0", port=port)
